@@ -1,5 +1,7 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
+import { Platform } from 'react-native';
+import { BlurView } from 'expo-blur';
 import { Home, Info } from 'lucide-react-native';
 
 export default function TabLayout() {
@@ -8,21 +10,41 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: '#3b82f6',
         tabBarInactiveTintColor: '#6b7280',
+        headerTransparent: true,
+        headerBlurEffect: 'systemChromeMaterial',
         headerStyle: {
-          backgroundColor: '#ffffff',
+          backgroundColor: Platform.OS === 'ios' ? 'rgba(255, 255, 255, 0.8)' : '#ffffff',
         },
-        headerShadowVisible: true,
+        headerShadowVisible: false,
         tabBarStyle: {
-          backgroundColor: '#ffffff',
-          borderTopWidth: 1,
-          borderTopColor: '#e5e7eb',
-          paddingBottom: 5,
-          paddingTop: 5,
-          height: 60,
+          position: 'absolute',
+          backgroundColor: Platform.OS === 'ios' ? 'rgba(255, 255, 255, 0.8)' : '#ffffff',
+          borderTopWidth: 0,
+          paddingBottom: 8,
+          paddingTop: 8,
+          height: 88,
+          elevation: 0,
         },
+        tabBarBackground: () => Platform.OS === 'ios' ? (
+          <BlurView
+            intensity={100}
+            tint="light"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              overflow: 'hidden',
+              borderTopWidth: 0.5,
+              borderTopColor: 'rgba(0, 0, 0, 0.1)',
+            }}
+          />
+        ) : null,
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: '600',
+          marginBottom: 4,
         },
       }}>
       <Tabs.Screen

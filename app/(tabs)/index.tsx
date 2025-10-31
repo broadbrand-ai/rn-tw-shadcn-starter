@@ -1,18 +1,22 @@
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { BlurView } from 'expo-blur';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import tw from 'twrnc';
 import { Sparkles, Smartphone, Zap } from 'lucide-react-native';
 import { Card, CardContent } from '@/components/ui';
 
 export default function HomeScreen() {
+  const insets = useSafeAreaInsets();
+
   return (
-    <ScrollView style={tw`flex-1 bg-gray-50`}>
+    <ScrollView style={tw`flex-1 bg-gray-50`} contentContainerStyle={{ paddingBottom: 100 }}>
       <LinearGradient
         colors={['#3b82f6', '#8b5cf6', '#ec4899']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={tw`pt-16 pb-12 px-6`}
+        style={[tw`pb-16 px-6`, { paddingTop: insets.top + 60 }]}
       >
         <View style={tw`items-center`}>
           <View style={tw`bg-white/20 rounded-full p-4 mb-6`}>

@@ -2,7 +2,8 @@
 
 <div align="center">
   <h3>The perfect starter template for building beautiful React Native apps</h3>
-  <p>Built with ❤️ by <a href="https://broadbrand.ai">Broadbrand</a></p>
+  <p>Built with ❤️ by <strong>Digitalise</strong></p>
+  <p><em>A proud member of Digital Solutions Group</em></p>
 </div>
 
 ---
@@ -70,7 +71,7 @@ Getting modern React Native tools to work together perfectly the first time seem
 
 ```bash
 # Clone the repository
-git clone https://github.com/broadbrand-ai/rn-tw-shadcn-starter.git
+git clone https://github.com/yourusername/rn-tw-shadcn-starter.git
 
 # Navigate to the project
 cd rn-tw-shadcn-starter
@@ -431,7 +432,9 @@ MIT License - feel free to use this starter for your projects!
 
 ## Credits
 
-Created by [Broadbrand](https://broadbrand.ai) - Building the future of mobile development.
+Created by **Digitalise** - A proud member of Digital Solutions Group
+
+Building the future of mobile development.
 
 If this starter saved you time, consider:
 - ⭐ Starring this repository
@@ -442,6 +445,6 @@ If this starter saved you time, consider:
 
 ## Support
 
-Need help? Visit [broadbrand.ai](https://broadbrand.ai) or open an issue on GitHub.
+Need help? Open an issue on GitHub.
 
 Happy coding! 🎉

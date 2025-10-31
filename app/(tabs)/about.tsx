@@ -1,26 +1,32 @@
 import React from 'react';
 import { View, Text, ScrollView, Linking, TouchableOpacity } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import tw from 'twrnc';
 import { ExternalLink, Package, Wrench, Heart, Globe } from 'lucide-react-native';
 import { Card, CardContent, CardHeader, CardTitle, Button } from '@/components/ui';
 
 export default function AboutScreen() {
+  const insets = useSafeAreaInsets();
+
   const openWebsite = () => {
-    Linking.openURL('https://broadbrand.ai');
+    Linking.openURL('https://digitalise.com');
   };
 
   return (
-    <ScrollView style={tw`flex-1 bg-gray-50`}>
-      <View style={tw`px-6 py-8`}>
-        {/* Broadbrand Header */}
+    <ScrollView style={tw`flex-1 bg-gray-50`} contentContainerStyle={{ paddingBottom: 100 }}>
+      <View style={[tw`px-6`, { paddingTop: insets.top + 80 }]}>
+        {/* Digitalise Header */}
         <Card className="mb-6">
           <CardContent>
             <View style={tw`items-center py-4`}>
               <View style={tw`bg-gradient-to-r from-blue-600 to-purple-600 rounded-full w-20 h-20 items-center justify-center mb-4`}>
-                <Text style={tw`text-3xl font-bold text-white`}>BB</Text>
+                <Text style={tw`text-3xl font-bold text-white`}>D</Text>
               </View>
               <Text style={tw`text-2xl font-bold text-gray-900 mb-2`}>
-                Broadbrand
+                Digitalise
+              </Text>
+              <Text style={tw`text-sm text-gray-500 mb-3 text-center`}>
+                A proud member of Digital Solutions Group
               </Text>
               <Text style={tw`text-gray-600 text-center mb-4`}>
                 Building the future of mobile development
@@ -29,7 +35,7 @@ export default function AboutScreen() {
                 <View style={tw`flex-row items-center`}>
                   <Globe color="#ffffff" size={16} style={tw`mr-2`} />
                   <Text style={tw`text-white font-semibold`}>
-                    Visit broadbrand.ai
+                    Visit Our Website
                   </Text>
                 </View>
               </Button>
@@ -165,13 +171,11 @@ export default function AboutScreen() {
           <View style={tw`flex-row items-center mb-2`}>
             <Text style={tw`text-gray-600 mr-1`}>Made with</Text>
             <Heart color="#ec4899" size={16} fill="#ec4899" />
-            <Text style={tw`text-gray-600 ml-1`}>by Broadbrand</Text>
+            <Text style={tw`text-gray-600 ml-1`}>by Digitalise</Text>
           </View>
-          <TouchableOpacity onPress={openWebsite}>
-            <Text style={tw`text-blue-600 font-semibold`}>
-              broadbrand.ai
-            </Text>
-          </TouchableOpacity>
+          <Text style={tw`text-gray-500 text-sm mb-2 text-center`}>
+            A proud member of Digital Solutions Group
+          </Text>
         </View>
       </View>
     </ScrollView>
