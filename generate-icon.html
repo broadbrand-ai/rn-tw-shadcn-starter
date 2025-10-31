@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>App Icon Generator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      background: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .icon-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .icon {
+      width: 1024px;
+      height: 1024px;
+      border-radius: 226px;
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    .icon-text {
+      font-size: 480px;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      letter-spacing: -20px;
+    }
+    .label {
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .instructions {
+      color: #999;
+      max-width: 1024px;
+      text-align: center;
+      line-height: 1.6;
+    }
+    .adaptive-icon {
+      width: 1024px;
+      height: 1024px;
+      border-radius: 0;
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    .favicon {
+      width: 512px;
+      height: 512px;
+      border-radius: 113px;
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .favicon .icon-text {
+      font-size: 240px;
+    }
+  </style>
+</head>
+<body>
+  <div class="instructions">
+    <h1 style="color: white; margin-bottom: 10px;">App Icon Generator</h1>
+    <p>Right-click on each icon below and "Save Image As" or take a screenshot.</p>
+    <p>Use an online tool like <a href="https://www.iloveimg.com/crop-image" style="color: #3b82f6;">iloveimg.com</a> to crop each to exact dimensions if needed.</p>
+  </div>
+
+  <div class="icon-container">
+    <div class="label">App Icon (1024x1024) - Save as icon.png</div>
+    <div class="icon">
+      <div class="icon-text">D</div>
+    </div>
+  </div>
+
+  <div class="icon-container">
+    <div class="label">Adaptive Icon (1024x1024) - Save as adaptive-icon.png</div>
+    <div class="adaptive-icon">
+      <div class="icon-text">D</div>
+    </div>
+  </div>
+
+  <div class="icon-container">
+    <div class="label">Favicon (512x512) - Save as favicon.png</div>
+    <div class="favicon">
+      <div class="icon-text">D</div>
+    </div>
+  </div>
+
+  <div class="instructions" style="margin-top: 30px;">
+    <h3 style="color: white;">Icon Specifications:</h3>
+    <ul style="text-align: left; display: inline-block;">
+      <li><strong>icon.png:</strong> 1024x1024px (iOS rounded corners)</li>
+      <li><strong>adaptive-icon.png:</strong> 1024x1024px (Android adaptive)</li>
+      <li><strong>splash-icon.png:</strong> 1024x1024px (use adaptive-icon.png)</li>
+      <li><strong>favicon.png:</strong> 512x512px or smaller</li>
+    </ul>
+  </div>
+
+  <script>
+    // You can download these programmatically
+    function downloadIcon(elementClass, filename) {
+      const element = document.querySelector('.' + elementClass);
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const size = elementClass === 'favicon' ? 512 : 1024;
+
+      canvas.width = size;
+      canvas.height = size;
+
+      // Create gradient
+      const gradient = ctx.createLinearGradient(0, 0, size, size);
+      gradient.addColorStop(0, '#3b82f6');
+      gradient.addColorStop(0.5, '#8b5cf6');
+      gradient.addColorStop(1, '#ec4899');
+
+      // Draw background
+      if (elementClass === 'icon' || elementClass === 'favicon') {
+        // Rounded corners
+        const radius = elementClass === 'icon' ? 226 : 113;
+        ctx.beginPath();
+        ctx.moveTo(radius, 0);
+        ctx.arcTo(size, 0, size, size, radius);
+        ctx.arcTo(size, size, 0, size, radius);
+        ctx.arcTo(0, size, 0, 0, radius);
+        ctx.arcTo(0, 0, size, 0, radius);
+        ctx.closePath();
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      } else {
+        // Square (adaptive)
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, size, size);
+      }
+
+      // Draw text
+      ctx.fillStyle = 'white';
+      ctx.font = `900 ${elementClass === 'favicon' ? '240' : '480'}px -apple-system, system-ui`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+      ctx.shadowBlur = elementClass === 'favicon' ? 16 : 32;
+      ctx.shadowOffsetY = elementClass === 'favicon' ? 4 : 8;
+      ctx.fillText('D', size / 2, size / 2);
+
+      // Download
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+      }, 'image/png');
+    }
+
+    // Add download buttons
+    document.querySelectorAll('.icon-container').forEach((container, index) => {
+      const button = document.createElement('button');
+      button.textContent = 'Download PNG';
+      button.style.cssText = 'padding: 12px 24px; background: #3b82f6; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px;';
+      button.onmouseover = () => button.style.background = '#2563eb';
+      button.onmouseout = () => button.style.background = '#3b82f6';
+
+      const classes = ['icon', 'adaptive-icon', 'favicon'];
+      const filenames = ['icon.png', 'adaptive-icon.png', 'favicon.png'];
+
+      button.onclick = () => downloadIcon(classes[index], filenames[index]);
+      container.appendChild(button);
+    });
+  </script>
+</body>
+</html>
