@@ -18,21 +18,24 @@ import { Card, CardContent } from '@/components/ui';
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
-  const iconScale = useSharedValue(0);
+  const iconScale = useSharedValue(0.3);
   const iconRotation = useSharedValue(0);
 
   useEffect(() => {
-    iconScale.value = withSpring(1, {
-      damping: 8,
-      stiffness: 100,
-    });
+    // Small delay to ensure component is mounted
+    setTimeout(() => {
+      iconScale.value = withSpring(1, {
+        damping: 8,
+        stiffness: 100,
+      });
 
-    iconRotation.value = withSequence(
-      withDelay(300, withSpring(10, { damping: 5 })),
-      withSpring(-10, { damping: 5 }),
-      withSpring(5, { damping: 5 }),
-      withSpring(0, { damping: 10 })
-    );
+      iconRotation.value = withSequence(
+        withDelay(300, withSpring(10, { damping: 5 })),
+        withSpring(-10, { damping: 5 }),
+        withSpring(5, { damping: 5 }),
+        withSpring(0, { damping: 10 })
+      );
+    }, 100);
   }, []);
 
   const iconAnimatedStyle = useAnimatedStyle(() => {
